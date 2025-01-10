@@ -1,0 +1,38 @@
+/* for every massage */
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+/* user massages */
+.userMsg {
+    background-color: #f1f1f1;
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* server reply massages*/
+.serverMsg {
+    background-color: #e6e6e6;
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* Responses from the server are suspicious  */
+.suspiciousMsg {
+    border: 2px solid #dc3545; /* red border*/
+    background-color: #fff5f5; /* light red background*/
+    font-weight: bold;
+}
+
+/*Responses from the server are safe */
+.safeMsg {
+    border: 2px solid #198754; /* green border */
+    background-color: #e9fbe8; /*light green background*/
+    font-weight: normal;
+}

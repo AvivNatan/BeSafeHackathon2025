@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router'
-import Home from './pages/HomePage/HomePage';
+//import Home from './pages/HomePage/HomePage';
 import styles from './styles/App.module.css';
+import Chat from "./pages/ChatPage/ChatPage";
 
 import projectLogo from './assets/project-logo.png'
 
@@ -16,7 +17,7 @@ function App() {
         </header>
         <main className={styles.main}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Chat />} />
           </Routes>
         </main>
         <footer className={styles.footer}>

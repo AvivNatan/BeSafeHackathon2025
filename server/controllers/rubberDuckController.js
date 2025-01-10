@@ -1,8 +1,9 @@
 import ducks from '../data/duckData.js';
+import messages from '../data/messagesData.js';
 
 // Get all ducks
-const getAllDucks = (req, res) => {
-    res.status(200).json({ ducks });
+const getAllMessages = (req, res) => {
+    res.status(200).json({ messages });
 };
 
 // Get a random duck
@@ -63,7 +64,7 @@ const updateDuck = (req, res) => {
 };
 
 export {
-    getAllDucks,
+    getAllMessages,
     getRandomDuck,
     getSingleDuck,
     createDuck,

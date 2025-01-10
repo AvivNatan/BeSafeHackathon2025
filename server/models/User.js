@@ -1,4 +1,5 @@
 import { connections } from '../config/db.js';
+import mongoose from 'mongoose';
 
 // יצירת סכמת המשתמש
 const userSchema = new mongoose.Schema({

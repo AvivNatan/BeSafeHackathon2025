@@ -1,7 +1,7 @@
 import express from 'express';
 import {
     createDuck,
-    getAllDucks,
+    getAllMessages,
     getSingleDuck,
     deleteDuck,
     updateDuck,
@@ -14,7 +14,7 @@ const router = express.Router();
  * Read Only Permission Routes
  */
 // GET all ducks
-router.get('/', getAllDucks)
+router.get('/messages', getAllMessages);
 
 // GET a random duck
 router.get('/random', getRandomDuck);

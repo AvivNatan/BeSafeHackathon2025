@@ -1,0 +1,13 @@
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* add space between massages*/
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+      /* הוספת סקרולר */
+    max-height: 400px; /* גבול גובה, אפשר לשנות לפי הצורך */
+    overflow-y: auto; /* יאפשר גלילה אנכית כשיש יותר מדי תוכן */
+}
