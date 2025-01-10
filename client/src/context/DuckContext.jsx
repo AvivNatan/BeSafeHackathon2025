@@ -9,6 +9,8 @@ const DuckProvider = ({ children }) => {
 
     const getRandomDuck = async () => {
         try {
+
+            //const response1 = await api.get('/user/createUser');
             const response = await api.get('/ducks/random');
             setDuck(response.data);
         } catch (error) {
@@ -28,7 +30,7 @@ const DuckProvider = ({ children }) => {
 };
 
 DuckProvider.propTypes = {
-  children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired
 };
 
 export { DuckContext, DuckProvider };
