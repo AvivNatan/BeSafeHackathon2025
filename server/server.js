@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import { connectToAllDBs } from './config/db.js';
 import userRoutes from './routes/userRoutes.js'; // מייבא את ה-routes
+import messageRoutes from './routes/messageRoutes.js';
 
 import rubberDuckRoutes from './routes/rubberDucks.js'; // Import the routes
 
@@ -23,6 +24,7 @@ connectToAllDBs();
 
 // חיבור ל-routes של משתמשים
 app.use('/user', userRoutes);
+app.use('/api/messages', messageRoutes);  // added my message routes
 //app.use('/another', anotherRoutes);
 
 // Start server
