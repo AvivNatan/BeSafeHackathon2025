@@ -22,11 +22,6 @@ app.use(express.json());
 // התחברות לכל מסדי הנתונים
 connectToAllDBs();
 
-// חיבור ל-routes של משתמשים
-app.use('/user', userRoutes);
-app.use('/api/messages', messageRoutes);  // added my message routes
-//app.use('/another', anotherRoutes);
-
 // Start server
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
@@ -36,6 +31,11 @@ app.listen(PORT, () => {
 app.use(cors({
   origin: process.env.CLIENT_URL
 }));
+
+
+// חיבור ל-routes של משתמשים
+app.use('/user', userRoutes);
+app.use('/api/messages', messageRoutes);  // added my message routes
 
 
 // קשור לברווזים

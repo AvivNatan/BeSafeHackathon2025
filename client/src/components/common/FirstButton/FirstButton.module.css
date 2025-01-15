@@ -1,6 +1,6 @@
 .button {
   padding: 10px 20px;
-  background-color: #FF7D9C;
+  background-color: #4299e1;
   color: white;
   border: none;
   border-radius: 4px;
@@ -9,11 +9,10 @@
 }
 
 .button:hover {
-  background-color: #ff517a;
+  background-color: #3182ce;
 }
 
 .button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-  

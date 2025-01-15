@@ -1,7 +1,6 @@
-import { connections } from '../config/db.js';
 import mongoose from 'mongoose';
+import { connections } from '../config/db.js';
 
-// יצירת סכמת המשתמש
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -10,9 +9,14 @@ const userSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-// יצירת המודל באמצעות חיבור ספציפי
-const User = connections.loginUserDB?.model('User', userSchema);
+let UserModel;
 
-export default User;
+const getUserModel = async () => {
+    if (!UserModel && connections.loginUserDB) {
+        // Only create the model if it doesn't already exist
+        UserModel = connections.loginUserDB.model('User', userSchema, 'users');
+    }
+    return UserModel;
+};
 
-
+export default getUserModel;
