@@ -1,21 +1,25 @@
 import "./Message.css";
 import PropTypes from 'prop-types';
 
-const Message = ({text, isUserSender, isSuspicious}) => {  //props message={text, isUserSender, isSuspicious}
+const Message = ({message, isUserMessage,timestamp, isSuspicious}) => { 
 
-    const msgSenderClass = isUserSender == true ? "userMsg" : "serverMsg"
-    const msgSuspiciousClassForServer = isUserSender ? "" : (isSuspicious ? "suspiciousMsg" : "safeMsg");
+    const msgSenderClass = isUserMessage == true ? "userMsg" : "serverMsg"
+    const msgSuspiciousClassForServer = isUserMessage ? "" : (isSuspicious ? "suspiciousMsg" : "safeMsg");
     return(
         <div className={`message ${msgSenderClass} ${msgSuspiciousClassForServer}`}>
-             {text}
+            <p className="message-text">{message}</p>
+            <span className="message-timestamp">
+                {timestamp instanceof Date ? timestamp.toLocaleString() : new Date(timestamp).toLocaleString()}
+            </span>
         </div>
     );
 };
 
 Message.propTypes = {
-    text: PropTypes.string.isRequired,
-    isUserSender: PropTypes.bool.isRequired,
-    isSuspicious: PropTypes.bool.isRequired
+    message: PropTypes.string.isRequired,
+    isUserMessage: PropTypes.bool.isRequired,
+    timestamp: PropTypes.instanceOf(Date).isRequired,
+    isSuspicious: PropTypes.bool
 };
 
 export default Message;

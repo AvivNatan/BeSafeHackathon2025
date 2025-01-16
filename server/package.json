@@ -15,7 +15,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.9.3"
+    "mongoose": "^8.9.3",
+    "natural": "^8.0.1",
+    "sentiment": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -36,3 +36,18 @@
     background-color: #e9fbe8; /*light green background*/
     font-weight: normal;
 }
+/* Timestamp for messages */
+.message-timestamp {
+    font-size: 0.8rem;
+    color: #888; 
+    margin-top: 5px;
+    display: block;
+    text-align: right; 
+}
+.suspiciousMsg .message-timestamp {
+    color: #dc3545; /* התאמה לצבע האדום */
+}
+
+.safeMsg .message-timestamp {
+    color: #198754; /* התאמה לצבע הירוק */
+}

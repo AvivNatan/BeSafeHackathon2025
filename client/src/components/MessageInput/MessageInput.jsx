@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./MessageInput.css"
 import FirstButton from "../common/FirstButton/FirstButton";
+import PropTypes from 'prop-types';
 
 //Props onSendMessage is function to start when user hit send button 
 //This function need to send the msg to server 
-const MessageInput = (onSendMessage ) => { 
+const MessageInput = ({ onSendMessage } ) => { 
     const [messageInput, setMessageInput] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
 
@@ -13,14 +14,21 @@ const MessageInput = (onSendMessage ) => {
     };
 
     const handleSendMessageInput = async () =>{
-        if(messageInput.trim()) // check if new Messageinput not empty
-        {
-            setIsDisabled(true);
-            await onSendMessage(messageInput); // send to the server the new msg
-            setMessageInput(""); // delete the msg from the input
-            setIsDisabled(false);
+        try{
+            if(messageInput.trim()) // check if new Messageinput not empty
+            {
+                setIsDisabled(true);
+                await onSendMessage(messageInput); // send to the server the new msg
+                setMessageInput(""); // delete the msg from the input
+                setIsDisabled(false);
+            }
         }
-        // if not meybe show error
+        catch(error) { 
+             console.error('Error fetching server Response', error.message);
+             setMessageInput(""); // delete the msg from the input
+             setIsDisabled(false);
+        }
+       
     };
 
     return (
@@ -36,6 +44,11 @@ const MessageInput = (onSendMessage ) => {
              <FirstButton onClick={handleSendMessageInput} disabled={isDisabled}>Send</FirstButton>
         </div>
     );
+};
+
+// Add PropTypes validation
+MessageInput.propTypes = {
+    onSendMessage: PropTypes.func.isRequired, // Validate onSendMessage as a required function
 };
 
 export default MessageInput;

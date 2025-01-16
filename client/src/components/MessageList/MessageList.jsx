@@ -8,8 +8,9 @@ const MessageList = ({messages}) => {
             {messages.map((message, index) => {
                 return ( <Message 
                     key={index}
-                    text={message.text}
-                    isUserSender={message.isUserSender}
+                    message={message.message}
+                    timestamp={message.timestamp}
+                    isUserMessage={message.isUserMessage}
                     isSuspicious={message.isSuspicious}/>
                 );}
             )}
@@ -20,7 +21,8 @@ const MessageList = ({messages}) => {
 MessageList.propTypes = {
     messages: PropTypes.arrayOf(
         PropTypes.shape({
-            text: PropTypes.string.isRequired,
+            message: PropTypes.string.isRequired,
+            timestamp:PropTypes.instanceOf(Date).isRequired,
             isUserSender: PropTypes.bool.isRequired,
             isSuspicious: PropTypes.bool.isRequired,
         })
