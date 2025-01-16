@@ -31,7 +31,7 @@ const MessagesProvider = ({ children }) => {
                         isUserMessage: msg.isUserMessage,
                         isSuspicious: msg.isSuspicious ?? null
                     }))
-                );
+                ).reverse();
                 setMessages(formattedMessages);
             }
         } catch (error) {
