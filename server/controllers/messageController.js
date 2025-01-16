@@ -32,7 +32,7 @@ const sendMessage = async (req, res) => {
         // Save user message
         await newUserMessage.save(); //isSuspicious,inResponseTo will be null
         // Placeholder for analysis result
-        const analysisResult = await analyzeMessage(newUserMessage.message);  // orel     
+        const analysisResult = analyzeMessage(newUserMessage.message);  // orel     
 
         // Create and save website's response
         const websiteResponse = new Message({
