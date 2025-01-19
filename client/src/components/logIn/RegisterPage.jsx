@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './LoginPage.css';
+import { useNavigate } from 'react-router'
 import { registerUser } from './authServiceForLogIn';
-// import { useNavigate } from 'react-router';  // היבוא של useNavigate
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState('');
@@ -10,7 +10,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  // const navigate = useNavigate();  // יצירת פונקציה לניווט
+
+  const navigate = useNavigate(); 
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,14 +23,11 @@ const RegisterPage = () => {
     }
 
     const result = await registerUser(fullName, email, username, password);
-
-    if (result.success) {
+    console.log(result);
+    if (result && result.success) {
       setSuccess(result.message);
-      console.log('Navigating to /user/login');
       setError(null);
-      // setTimeout(() => {
-      //   navigate('/user/login');  // ניווט לעמוד הבית לאחר 2 שניות
-      // }, 2000);
+      navigate('/login');
     } else {
       setError(result.message);
       setSuccess(null);
@@ -80,9 +78,8 @@ const RegisterPage = () => {
             required
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
-        {/* {success && <div className="success-message">{success}</div>} */}
-        {success && <div className="success-message">{typeof success === 'string' ? success : JSON.stringify(success)}</div>} {/* מציגים את ההודעה אם היא אובייקט */}
+        {error && <div className="error-message">{typeof error === 'object' ? error.message : error}</div>}
+        {success && <div className="success-message">{typeof success === 'object' ? success.message : success}</div>}
         <button type="submit" className="login-button">Register</button>
       </form>
     </div>

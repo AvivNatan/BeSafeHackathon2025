@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router'
-
-
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router'
 import './LoginPage.css';
-import { loginUser } from './authServiceForLogIn'; // היבוא של פונקציה לשליחת בקשה לשרת
+import { loginUser } from './authServiceForLogIn';
+import { UserContext } from '../../context/UserContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +10,8 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +27,8 @@ const LoginPage = () => {
     if (result && result.success) {
       setSuccess(result.message);
       setError(null);
+      login(result.message.user);
+      navigate('/chat');
     } else {
       setError(result ? result.message : 'Unexpected error');
       setSuccess(null);
@@ -56,12 +59,8 @@ const LoginPage = () => {
             required
           />
         </div>
-        {/* {error && <div className="error-message">{error.message}</div>} */}
         {error && <div className="error-message">{typeof error === 'object' ? error.message : error}</div>}
         {success && <div className="success-message">{typeof success === 'object' ? success.message : success}</div>}
-
-        {/* {success && <div className="success-message">{typeof success === 'string' ? success : JSON.stringify(success)}</div>} מציגים את ההודעה אם היא אובייקט */}
-        {/* {success && <div className="success-message">{success.message}</div>} */}
 
         <button type="submit" className="login-button">Login</button>
       </form>
