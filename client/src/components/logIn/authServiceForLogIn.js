@@ -2,11 +2,6 @@ import axiosInstance from '../../services/api'; // חזרה שני שלבים א
 
 export const registerUser = async (fullName, email, username, password) => {
   try {
-    // const response = await fetch('http://localhost:3000/user/register', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ fullName, email, username, password }),
-    // });
     const response = await axiosInstance.post('/user/register', {
       fullName,
       email,
@@ -29,15 +24,13 @@ export const registerUser = async (fullName, email, username, password) => {
 // LogIn function
 export const loginUser = async (email, password) => {
   try {
-    // const response = await fetch('http://localhost:3000/user/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password }),
-    // });
     const response = await axiosInstance.post('/user/login', {
       email,
       password
     });
+
+    console.log('Login response:', response); // הדפסת התגובה מהשרת
+
 
     // const data = await response.text();
     if (!response || !response.data) {
@@ -46,13 +39,23 @@ export const loginUser = async (email, password) => {
     const data = response.data;
 
     if (response.status === 201 || response.status === 200) {
-      return { success: true, message: data }; // הצלחה
+      return { success: true, message: data}; // הצלחה
     } else if (response.status === 404) {
-      return { success: false, message: 'User not found' }; // לא נמצא
+      return { success: false, message: data.message}; // לא נמצא
     } else if (response.status === 401) {
-      return { success: false, message: 'Invalid password' }; // סיסמא שגויה
+      return { success: false, message: 'Invalid credentials (401)' }; // סיסמה או אימייל לא נכונים
     }
-  } catch (err) {
-    return { success: false, message: 'Error connecting to the server: ' + err.message }; // שגיאה בהתחברות
-  }
-};
+  } catch (error) {
+    if (error.response) {
+      // השרת החזיר תשובה עם קוד סטטוס שאינו 2xx
+      if (error.response.status === 401) {
+          console.error('Invalid credentials:', error.response.data);
+          return { success: false, message: error.response.data}; // לא נמצא
+      } else {
+          console.error('Server error:', error.response.data.message);
+          console.error('Error connecting to the server:', error.response.data.message);
+          return { success: false, message: error.response.data}; // לא נמצא
+          // return { success: false, message: 'Error connecting to the server: ' + error.response.data.message }; // שגיאה בהתחברות
+        }};
+    }
+}
