@@ -1,6 +1,6 @@
 import getMessageModel from '../models/Message.js';
 import getUserModel from '../models/User.js';
-import  analyzeMessage from '../services/messageAnalyzer.js'; //or whereever and whatever the name will be
+import  analyzeMessage from '../services/AnalyzeMessagePerspective.js'; //or whereever and whatever the name will be
 // Function to send a new message and get response
 const sendMessage = async (req, res) => {
     const { userId, message, timestamp, isUserMessage } = req.body;

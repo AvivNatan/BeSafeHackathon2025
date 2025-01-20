@@ -9,29 +9,45 @@ const sentiment = new Sentiment();
 
 
 // Function to classify message using Hugging Face zero-shot classification model
-const classifyMessageWithHuggingFace = async (message) => {
+const classifyMessageWithPerspective= async (message) => {
     if (!message) throw new Error('Message is required for classification.');
 
-    const apiEndpoint = 'https://api-inference.huggingface.co/models/facebook/bart-large-mnli'; // Zero-shot classification model
-    const headers = {
-        'Authorization': `Bearer ${process.env.HF_TOKEN}`,  
-    };
-
-    const labels = ['sexual_harassment message', 'safe message', 'bullying', 'hate speech'];  // Define custom categories
 
     try {
-        const response = await axios.post(apiEndpoint, {
-            inputs: message,
-            parameters: {
-                candidate_labels: labels, // These are the categories you want to classify into
+        const response = await axios.post(
+            'https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze',
+            {
+                comment: { text: message },
+                languages: ["en"],
+                requestedAttributes: {SEXUALLY_EXPLICIT:{},FLIRTATION:{} ,SEVERE_TOXICITY:{}, INSULT:{}, PROFANITY:{}, THREAT:{}, IDENTITY_ATTACK:{} }
             },
-        }, { headers });
+            {
+                headers: { 'Content-Type': 'application/json' },
+                params: { key: process.env.PERSPECTIVE_API_KEY }
+            }
+        );
 
+        // Convert to array and find highest score
+        const scoresArray = Object.entries(response.data.attributeScores)
+            .map(([attribute, data]) => ({
+                attribute,
+                score: data.summaryScore.value
+            }));
+
+        // Sort array by score in descending order
+        scoresArray.sort((a, b) => b.score - a.score);
         console.log(response.data);
-        return response.data;
+        //res.json(response.data);
+        console.log(scoresArray);
+        let classification = {attribute: 'safe', score:0.8};
+        if(scoresArray[0].score > 0.5){
+            classification = scoresArray[0]
+        }
+        console.log(classification)
+        return classification;
     } catch (error) {
-        console.error('Error while calling Hugging Face API:', error);
-        return null;
+        console.error('Error calling the Perspective API:', error);
+        // res.status(500).json({ message: 'Error processing the analysis' });
     }
 };
 
@@ -96,20 +112,22 @@ const computeFeatures = (message) => {
 // Generate feedback
 const generateFeedback = (sentimentScore, classification, features) => {
     switch (classification) {
-        case 'phishing':
-            return 'The message appears to be a phishing attempt. Avoid clicking on suspicious links.';
-        case 'fraud':
-            return 'The message contains fraudulent content. Do not provide sensitive information.';
-        case 'sexual_assault':
-        case'sexual_harassment message':
-            return 'The message contains harmful or inappropriate language. Report it if necessary.';
+        case 'SEXUALLY_EXPLICIT':
+            return 'The message contains sexually explicit content. Please avoid sending such messages.';
+        case 'FLIRTATION':
+            return 'The message appears to contain flirtatious content. Ensure the tone is appropriate.';
+        case 'SEVERE_TOXICITY':
+            return 'The message contains severe toxicity. This language is harmful and should be avoided.';
+        case 'INSULT':
+            return 'The message includes insulting language. Please communicate respectfully.';
+        case 'PROFANITY':
+            return 'The message contains profanity. Avoid using inappropriate language.';
+        case 'THREAT':
+            return 'The message contains a threat. This is serious and should be reported immediately.';
+        case 'IDENTITY_ATTACK':
+            return 'The message targets someones identity. Such language is unacceptable and should be avoided.';
         case 'safe':
-        case 'safe message':
-            return 'The message appears to be safe.';
-        case 'bullying':
-            return 'The message contains harmful or bullying language. Consider addressing the issue respectfully or reporting it if necessary.'
-        case 'hate speech':
-            return 'The message contains hate speech. Avoid using offensive language.'
+            return 'The message appears to be safe, but please be careful and review the content for any potential issues.';
         default:
             if (sentimentScore < 0) {
                 return 'The message has a negative tone. Avoid sending messages with harmful or aggressive language.';
@@ -136,26 +154,24 @@ const analyzeMessage = async(message) => {
     }
 
      // Get classification from Hugging Face model
-     const hfClassification = await classifyMessageWithHuggingFace(message);
+     const perClassification = await classifyMessageWithPerspective(message);
 
      // Analyze the result from Hugging Face model
    
-     if (hfClassification && hfClassification.labels && hfClassification.scores) {
+     if (perClassification) {
         // Get the label with the highest score
-        const bestIndex = hfClassification.scores.indexOf(Math.max(...hfClassification.scores));
-        const bestLabel = hfClassification.labels[bestIndex];
-        classification = bestLabel;
-        console.log("Hugging Face Classification:", bestIndex);
-        console.log("Best Label:", bestLabel);
+        classification = perClassification.attribute
+       // console.log("Hugging Face Classification:", bestIndex);
+        //console.log("Best Label:", bestLabel);
     
     }
     else{
-        console.log("No classification found from Hugging Face model");
+        console.log("No classification found from perspective model");
     }
     const feedback = generateFeedback(sentimentScore, classification, features);
 
     return {
-        isUnsafe: classification === 'phishing' || classification === 'fraud' || classification === 'sexual_assault' || sentimentScore < 0 || features.hasRepeatedPunctuation || features.hasAllCaps || classification == 'bullying',
+        isUnsafe: classification === 'SEXUALLY_EXPLICIT' || classification === 'FLIRTATION' || classification === 'INSULT' ||classification==='PROFANITY' || classification === 'THREAT' || classification === 'IDENTITY_ATTACK' || sentimentScore < 0 || features.hasRepeatedPunctuation || features.hasAllCaps || classification == 'bullying',
         analysis: {
             sentimentScore,
             classification,
