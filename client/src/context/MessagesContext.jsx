@@ -1,13 +1,15 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import api from '../services/api';
 import PropTypes from 'prop-types';
+import { UserContext } from './UserContext';
 
 const MessagesContext = createContext();
 
 const MessagesProvider = ({ children }) => {
   
+    const { userId } = useContext(UserContext);
 
-    const userId = "aviv@gmail.com" // just for now
+    // const userId = "aviv@gmail.com" // just for now
     const [messages, setMessages] = useState([]);
 
     // when userID change i need to fetch the history messages and show them 

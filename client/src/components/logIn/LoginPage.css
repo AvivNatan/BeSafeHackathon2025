@@ -1,10 +1,92 @@
+/* UserGreeting.module.css */
+
+.userGreeting {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* רקע לבן אטום */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: #f0f0f0; /* צבע רקע של המודל */
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modalButton {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.modalButton.yes {
+  background-color: green; /* צבע הכפתור Yes */
+  color: white;
+}
+
+.modalButton.yes:hover {
+  background-color: darkgreen;
+}
+
+.modalButton.no {
+  background-color: red; /* צבע הכפתור No */
+  color: white;
+}
+
+.modalButton.no:hover {
+  background-color: darkred;
+}
+
+.appLink {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.appLink:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* רקע משתנה בלחיצה */
+}
+
+/* עיצוב עמוד ה-LoginPage */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 150px);
-  /* מתחשב בגובה ה-header וה-footer */
+  min-height: calc(100vh - 150px); /* מתחשב בגובה ה-header וה-footer */
   padding: 2rem;
 }
 
@@ -19,10 +101,11 @@
 
 .login-title {
   color: #2d3748;
-  font-size: 1.875rem;
+  font-size: 2.5rem; /* גודל הטקסט מוגדל */
   font-weight: 600;
   margin-bottom: 2rem;
   text-align: center;
+  font-family: 'Georgia', serif; /* שימוש בפונט Georgia */
 }
 
 .input-group {
@@ -55,7 +138,7 @@
 .login-button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #4299e1;
+  background-color: #00b722; /* צבע ירוק */
   color: white;
   border: none;
   border-radius: 6px;
@@ -66,12 +149,12 @@
 }
 
 .login-button:hover {
-  background-color: #3182ce;
+  background-color: #008518;
 }
 
 .login-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  box-shadow: 0 0 0 3px rgba(85, 255, 96, 0.5);
 }
 
 .error-message {
