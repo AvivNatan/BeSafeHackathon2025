@@ -51,6 +51,7 @@
 .modalButton.yes {
   background-color: green; /* צבע הכפתור Yes */
   color: white;
+  font-family: 'Playfair Display', serif;
 }
 
 .modalButton.yes:hover {
@@ -105,7 +106,7 @@
   font-weight: 600;
   margin-bottom: 2rem;
   text-align: center;
-  font-family: 'Georgia', serif; /* שימוש בפונט Georgia */
+  font-family: 'Cabinet Grotesk', sans-serif;  /* שימוש בפונט Georgia */
 }
 
 .input-group {
@@ -118,6 +119,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  font-family: 'Public Sans', sans-serif;
 }
 
 .input-field {
@@ -143,9 +145,10 @@
   border: none;
   border-radius: 6px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 1000;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-family: 'Public Sans', sans-serif;
 }
 
 .login-button:hover {
@@ -175,6 +178,7 @@
   margin-bottom: 1rem;
   font-size: 0.875rem;
   text-align: center;
+  font-family: 'Public Sans', sans-serif;
 }
 
 .register-link {
@@ -200,6 +204,7 @@
 @media (max-width: 640px) {
   .login-form {
     padding: 1.5rem;
+    font-family: 'Public Sans', sans-serif;
   }
 
   .login-title {

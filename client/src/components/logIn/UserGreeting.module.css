@@ -1,116 +1,195 @@
 /* UserGreeting.module.css */
 .userGreeting {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 500;
+  margin-right: 10px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  background-color: #e3f2fd;
+  box-shadow: 0 2px 8px rgba(76, 134, 202, 0.1);
+  animation: fadeIn 1.5s ease-out forwards;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.username:hover {
+  color: #4c86ca;
+  background-color: #f8fbfe;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 134, 202, 0.15);
+  border-color: rgba(76, 134, 202, 0.2);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.appNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #4c86ca;
+  cursor: pointer;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.link:hover {
+  text-decoration: none;
+  background-color: rgba(76, 134, 202, 0.1);
+  color: #2c5282;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 62, 80, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  font-family: 'Public Sans', sans-serif;
+  animation: modalSlideIn 0.3s ease-out;
+  border: 1px solid #edf2f7;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modalButton {
+  margin: 10px;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modalButton.yes {
+  background-color: #4c86ca;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.modalButton.yes:hover {
+  background-color: #3a75b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 134, 202, 0.2);
+}
+
+.modalButton.no {
+  background-color: #e53e3e;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.modalButton.no:hover {
+  background-color: #c53030;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(229, 62, 62, 0.2);
+}
+
+.appLink {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-family: 'Public Sans', sans-serif;
+  position: relative;
+}
+
+.appLink:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.appLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.appLink:hover::after {
+  width: 80%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .username {
-    font-family: cursive, sans-serif;  /* פונט של כתב יד */
-    font-size: 1rem;  /* גודל טקסט גדול יותר */
-    color: #000873;  /* צבע טקסט ירוק */
-    font-weight: lighter;
-    margin-right: 10px;
-    padding: 15px;
-    border-radius: 4px;
-    background-color: #c4ebff;  /* רקע בהיר */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* צל קל */
-    animation: fadeIn 2s ease-in-out forwards;  /* אנימציה איטית של 3 שניות */
-    opacity: 0;  /* ה-username מתחיל עם opacity 0 */
-  }
-
-  .username:hover {
-    color: #fff;  /* שינוי צבע הטקסט בעת ריחוף */
-    background-color: #bad4e1;  /* שינוי רקע בעת ריחוף */
-    transform: scale(1.1);  /* הגדלת הטקסט מעט */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);  /* צל חזק יותר */
-  }
-  
-  /* אפקט אנימציה של Fade In */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);  /* מתחיל ממיקום נמוך */
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);  /* מגיע למיקומו הסופי */
-    }
-  }
-
-  .appNav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .link {
-    text-decoration: none;
-    color: blue;
-    cursor: pointer;
-  }
-  
-  .link:hover {
-    text-decoration: underline;
-  }
-  
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* רקע לבן אטום */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContent {
-    background-color: #f0f0f0; /* צבע רקע של המודל */
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modalButton {
-    margin: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .modalButton.yes {
-    background-color: green; /* צבע הכפתור Yes */
-    color: white;
-  }
-  
-  .modalButton.yes:hover {
-    background-color: darkgreen;
-  }
-  
-  .modalButton.no {
-    background-color: red; /* צבע הכפתור No */
-    color: white;
-  }
-  
-  .modalButton.no:hover {
-    background-color: darkred;
-  }
-  
-  .appLink {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
     font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    padding: 0.6rem 1rem;
   }
-  
-  .appLink:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* רקע משתנה בלחיצה */
+
+  .modalContent {
+    margin: 1rem;
+    padding: 1.5rem;
   }
-  
+
+  .modalButton {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
+}
