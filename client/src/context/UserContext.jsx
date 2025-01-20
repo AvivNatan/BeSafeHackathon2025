@@ -5,22 +5,23 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = (user, email) => {
+  const login = (user, userId) => {
     setUser(user);
-    setEmail(email);
+    setUserId(userId)
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     setUser(null);
+    setUserId(null);
     setIsLoggedIn(false);
   };
 
   return (
-    <UserContext.Provider value={{ user, email, isLoggedIn, login, logout }}>
+    <UserContext.Provider value={{ user, userId, isLoggedIn, login, logout }}>
       {children}
     </UserContext.Provider>
   );
