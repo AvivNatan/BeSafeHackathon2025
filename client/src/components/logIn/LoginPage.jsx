@@ -27,7 +27,7 @@ const LoginPage = () => {
     if (result && result.success) {
       setSuccess(result.message);
       setError(null);
-      login(result.message.user);
+      login(result.message.user, result.message.email);
       navigate('/chat');
     } else {
       setError(result ? result.message : 'Unexpected error');
