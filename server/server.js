@@ -37,11 +37,8 @@ app.use('/user', userRoutes);
 app.use('/api/messages', messageRoutes);  // added my message routes
 
 
-// קשור לברווזים
-app.use('/images', express.static(path.join(__dirname, 'images'))); // Serve static images
 
-// Use the routes file for all `/ducks` routes
-app.use('/ducks', rubberDuckRoutes);
+
 
 
 
