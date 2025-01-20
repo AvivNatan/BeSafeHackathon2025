@@ -1,6 +1,8 @@
 /* MessageList.css */
 .messages-container {
   display: flex;
+  overflow-y: auto;
+  scroll-behavior: smooth;
   flex-direction: column;
   gap: 10px;
   padding: 20px;

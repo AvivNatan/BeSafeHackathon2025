@@ -30,9 +30,7 @@ function App() {
               <Route path="/chat" element={<Chat />} />           
             </Routes>
           </main>
-          <footer className={styles.footer}>
-            <p>&copy; Safe Chat</p>
-          </footer>
+        
         </div>
       </BrowserRouter>
   );
