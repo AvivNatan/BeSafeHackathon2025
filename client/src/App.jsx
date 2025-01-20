@@ -16,7 +16,7 @@ function App() {
         <div className={styles.app}>
           <header className={styles.appHeader}>
             <nav className={styles.appNav}>
-              <Link to="/" className={styles.appLink}>Register</Link>
+              {!isLoggedIn ? (<Link to="/" className={styles.appLink}>Register</Link>) : null}
               {!isLoggedIn ? ( <Link to="/login" className={styles.appLink}>Login</Link> ) : 
               ( <UserGreeting isLoggedIn={isLoggedIn} user={user} logout={logout} /> )}
             </nav>

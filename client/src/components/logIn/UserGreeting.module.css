@@ -20,7 +20,7 @@
 
   .username:hover {
     color: #fff;  /* שינוי צבע הטקסט בעת ריחוף */
-    background-color: #4CAF50;  /* שינוי רקע בעת ריחוף */
+    background-color: #bad4e1;  /* שינוי רקע בעת ריחוף */
     transform: scale(1.1);  /* הגדלת הטקסט מעט */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);  /* צל חזק יותר */
   }
