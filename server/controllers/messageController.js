@@ -43,6 +43,7 @@ const sendMessage = async (req, res) => {
             inResponseTo: newUserMessage._id, // Reference to original message
             isSuspicious:analysisResult.isUnsafe
         });
+        
         await websiteResponse.save();
         res.status(201).json({
             //userMessage: newUserMessage, // i dont need this to return ------
