@@ -2,10 +2,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';  // היבוא של PropTypes
 import styles from './UserGreeting.module.css'; // הוספת קובץ CSS מותאם
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const UserGreeting = ({ isLoggedIn, user, logout }) => {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setShowModal(true);
@@ -14,6 +15,7 @@ const UserGreeting = ({ isLoggedIn, user, logout }) => {
   const confirmLogout = () => {
     logout();
     setShowModal(false);
+    navigate('/login');
   };
 
   const cancelLogout = () => {
@@ -23,7 +25,7 @@ const UserGreeting = ({ isLoggedIn, user, logout }) => {
   if (isLoggedIn) {
     return (
       <>
-        <Link to="/login" onClick={handleLogout} className={styles.appLink}>Logout</Link>
+        <Link to="/chat" onClick={handleLogout} className={styles.appLink}>Logout</Link>
         {showModal && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>

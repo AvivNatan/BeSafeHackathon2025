@@ -1,27 +1,58 @@
-.msgInput-container { 
+.msgInput-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Space between input and button */
     padding: 10px;
-}
-
-.input-container {
+    background-color: #f9fafc; /* Light neutral background */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    margin-top: 10px; /* Add margin to push it down */
+    position: relative; /* Prevent overlapping */
+    width: 100%;
+    max-width: 800px; /* Ensure it's centered and sized properly */
+  }
+  
+  /* Input Field */
+  .input-container {
     flex: 1;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 5px; /* Comfortable padding */
+    border-radius: 4px; /* Rounded corners for the input */
+    border: 1px solid #d1d5db; /* Light gray border */
     font-size: 16px;
-}
-
-.send-button {
-    padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #ffffff; /* Clean white background */
+    width: 100%; /* Ensures it stretches full width */
+    max-width: 100%; /* Prevents exceeding container width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover and focus transitions */
+  }
+  
+  .input-container:focus {
+    outline: none;
+    border-color: #4c86ca; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(76, 134, 202, 0.3); /* Subtle blue glow */
+  }
+  
+  /* Send Button */
+  .send-button {
+    padding: 8px 12px; /* Increased padding for a balanced size */
+    background-color: #4c86ca; /* Modern soft blue */
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px; /* Rounded corners for the button */
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-}
-
-.send-button:hover {
-    background-color: #0056b3;
-}
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 12px rgba(76, 134, 202, 0.2); /* Subtle shadow */
+  }
+  
+  .send-button:hover {
+    background-color: #3a75b9; /* Slightly darker blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 16px rgba(58, 117, 185, 0.3); /* Enhanced shadow */
+  }
+  
+  .send-button:active {
+    transform: translateY(0); /* Reset position on click */
+    box-shadow: 0 2px 6px rgba(76, 134, 202, 0.2); /* Reduced shadow on click */
+  }
+  

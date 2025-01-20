@@ -1,53 +1,78 @@
-/* for every massage */
+/* General message styling */
 .message {
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
-    max-width: 70%;
+    padding: 12px 16px; /* Added padding for better readability */
+    margin: 8px 0; /* Increased spacing between messages */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    max-width: 70%; /* Restrict width for better layout */
     word-wrap: break-word;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-}
-
-/* user massages */
-.userMsg {
-    background-color: #f1f1f1;
-    align-self: flex-end;
-    text-align: right;
-}
-
-/* server reply massages*/
-.serverMsg {
-    background-color: #e6e6e6;
-    align-self: flex-start;
-    text-align: left;
-}
-
-/* Responses from the server are suspicious  */
-.suspiciousMsg {
-    border: 2px solid #dc3545; /* red border*/
-    background-color: #fff5f5; /* light red background*/
-    font-weight: bold;
-}
-
-/*Responses from the server are safe */
-.safeMsg {
-    border: 2px solid #198754; /* green border */
-    background-color: #e9fbe8; /*light green background*/
-    font-weight: normal;
-}
-/* Timestamp for messages */
-.message-timestamp {
-    font-size: 0.8rem;
-    color: #888; 
+    font-family: 'Poppins', sans-serif; /* Modern, clean font */
+    font-size: 16px; /* Adjusted font size for clarity */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  }
+  
+  /* User messages */
+  .userMsg {
+    background-color: #e8f5ff; /* Light blue background for user messages */
+    align-self: flex-end; /* Align to the right */
+    text-align: right; /* Align text to the right */
+    color: #2c3e50; /* Darker text for contrast */
+  }
+  
+  /* Server reply messages */
+  .serverMsg {
+    background-color: #f9f9f9; /* Light gray background for server messages */
+    align-self: flex-start; /* Align to the left */
+    text-align: left; /* Align text to the left */
+    color: #2c3e50; /* Neutral dark text */
+  }
+  
+  /* Suspicious server replies */
+  .suspiciousMsg {
+    border: 2px solid #dc3545; /* Red border for alert */
+    background-color: #fff5f5; /* Light red background */
+    font-weight: bold; /* Bold text for emphasis */
+    color: #842029; /* Dark red for high visibility */
+  }
+  
+  /* Safe server replies */
+  .safeMsg {
+    border: 2px solid #198754; /* Green border for reassurance */
+    background-color: #e9fbe8; /* Light green background */
+    font-weight: normal; /* Regular font weight */
+    color: #155724; /* Dark green for contrast */
+  }
+  
+  /* Timestamp for messages */
+  .message-timestamp {
+    font-size: 0.8rem; /* Small font size for timestamp */
+    color: #6c757d; /* Muted gray color */
     margin-top: 5px;
     display: block;
-    text-align: right; 
-}
-.suspiciousMsg .message-timestamp {
-    color: #dc3545; /* התאמה לצבע האדום */
-}
-
-.safeMsg .message-timestamp {
-    color: #198754; /* התאמה לצבע הירוק */
-}
+    text-align: right; /* Align timestamp to the right */
+  }
+  
+  /* Suspicious message timestamp */
+  .suspiciousMsg .message-timestamp {
+    color: #dc3545; /* Matches the red alert color */
+  }
+  
+  /* Safe message timestamp */
+  .safeMsg .message-timestamp {
+    color: #198754; /* Matches the green reassurance color */
+  }
+  
+  /* Hover effect for messages */
+  .message:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Responsive design for messages */
+  @media (max-width: 768px) {
+    .message {
+      max-width: 90%; /* Adjust width for smaller screens */
+      font-size: 14px; /* Reduce font size slightly */
+    }
+  }
+  

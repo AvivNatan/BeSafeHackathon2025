@@ -1,42 +1,33 @@
-/* UserGreeting.module.css */
-
-.userGreeting {
-  display: flex;
-  align-items: center;
+/* General Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #edf0f5, #e8e9f3, #ffffff); /* Soft neutral gradient */
+  background-size: 200% 200%;
+  animation: backgroundGradient 8s ease infinite; /* Smooth animated gradient */
+  color: #2d3748;
 }
 
-.username {
-  margin-right: 10px;
-}
-
-.link {
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
+/* Modal Styling */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9); /* רקע לבן אטום */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modalContent {
-  background-color: #f0f0f0; /* צבע רקע של המודל */
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 .modalButton {
@@ -44,68 +35,59 @@
   padding: 10px 20px;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .modalButton.yes {
-  background-color: green; /* צבע הכפתור Yes */
+  background: linear-gradient(135deg, #ff8a00, #ff3d81); /* Vibrant gradient for Yes */
   color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
 }
 
 .modalButton.yes:hover {
-  background-color: darkgreen;
+  background: linear-gradient(135deg, #e97700, #e3346f); /* Slightly darker hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 61, 129, 0.4);
 }
 
 .modalButton.no {
-  background-color: red; /* צבע הכפתור No */
+  background: #f65a5a; /* Soft red with a coral vibe */
   color: white;
 }
 
 .modalButton.no:hover {
-  background-color: darkred;
+  background: #e14a4a; /* Slightly darker coral */
+  transform: scale(1.02);
 }
 
-.appLink {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.appLink:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* רקע משתנה בלחיצה */
-}
-
-/* עיצוב עמוד ה-LoginPage */
+/* Login Form Styling */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 150px); /* מתחשב בגובה ה-header וה-footer */
+  min-height: calc(100vh - 450px);
   padding: 2rem;
 }
 
 .login-form {
-  background: white;
+  background: #ffffff; /* Clean white background */
   padding: 2.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
 }
 
 .login-title {
-  color: #2d3748;
-  font-size: 2.5rem; /* גודל הטקסט מוגדל */
+  color: #2d1a46; /* Deep purple for elegance */
+  font-size: 2.2rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: center;
-  font-family: 'Georgia', serif; /* שימוש בפונט Georgia */
 }
 
 .input-group {
@@ -114,7 +96,7 @@
 
 .input-label {
   display: block;
-  color: #4a5568;
+  color: #6a6f92; /* Muted purple-gray */
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -123,43 +105,46 @@
 .input-field {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 1px solid #d1cce6;
+  border-radius: 10px;
   font-size: 1rem;
-  transition: all 0.2s ease;
+  background-color: #f9f7ff; /* Subtle lavender fill */
+  transition: all 0.3s ease;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  border-color: #b983ff; /* Soft lavender focus */
+  box-shadow: 0 0 0 3px rgba(185, 131, 255, 0.4);
 }
 
 .login-button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #00b722; /* צבע ירוק */
+  background: linear-gradient(135deg, #553ec8, #3e60a9); /* Rich gradient purple */
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: #008518;
+  background: linear-gradient(135deg, #6c4ce8, #3b2bb0); /* Hover gradient */
+  box-shadow: 0 4px 12px rgba(125, 95, 255, 0.4);
 }
 
 .login-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(85, 255, 96, 0.5);
+  box-shadow: 0 0 0 3px rgba(125, 95, 255, 0.4);
 }
 
+/* Error and Success Messages */
 .error-message {
-  background-color: #fff5f5;
-  color: #c53030;
+  background-color: #ffe6e6;
+  color: #d32f2f;
   padding: 0.75rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -168,8 +153,8 @@
 }
 
 .success-message {
-  background-color: #f0fff4;
-  color: #2f855a;
+  background-color: #e6f7e9;
+  color: #2e7d32;
   padding: 0.75rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -177,22 +162,23 @@
   text-align: center;
 }
 
+/* Register Link */
 .register-link {
   margin-top: 1.5rem;
   text-align: center;
-  color: #4a5568;
+  color: #6a6f92;
   font-size: 0.875rem;
 }
 
 .register-link a {
-  color: #4299e1;
+  color: #7d5fff; /* Matches the button */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .register-link a:hover {
-  color: #3182ce;
+  color: #382f6c;
   text-decoration: underline;
 }
 
@@ -203,6 +189,18 @@
   }
 
   .login-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+  }
+}
+
+@keyframes backgroundGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
