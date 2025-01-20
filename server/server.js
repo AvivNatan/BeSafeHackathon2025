@@ -1,6 +1,6 @@
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
+//import path from 'path';
+//import { fileURLToPath } from 'url';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -9,8 +9,8 @@ import userRoutes from './routes/userRoutes.js'; // מייבא את ה-routes
 import messageRoutes from './routes/messageRoutes.js';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
