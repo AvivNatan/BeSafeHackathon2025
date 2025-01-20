@@ -30,7 +30,7 @@ function App() {
             </Routes>
           </main>
           <footer className={styles.footer}>
-            <p>&copy; 2024 My App</p>
+            <p>&copy; Safe Chat</p>
           </footer>
         </div>
       </BrowserRouter>
