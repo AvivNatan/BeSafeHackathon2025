@@ -1,10 +1,20 @@
+import { useEffect, useRef } from 'react';
 import Message from "../Message/Message";
 import "./MessageList.css"
 import PropTypes from 'prop-types';
 
 const MessageList = ({messages}) => {
+    //referrence to the last massage 
+    const messagesEndRef = useRef(null);
+    
+    // when messages change scroll down to the last message
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
     return (
         <div className="messages-container">
+
             {messages.map((message, index) => {
                 return ( <Message 
                     key={index}
@@ -14,6 +24,7 @@ const MessageList = ({messages}) => {
                     isSuspicious={message.isSuspicious}/>
                 );}
             )}
+            <div ref={messagesEndRef} />
         </div>
     );
 }; 
