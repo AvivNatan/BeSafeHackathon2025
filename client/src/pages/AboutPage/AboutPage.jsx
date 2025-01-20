@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div className="about-page">
       <div className="about-content">
-        <h1>About Safe Chat Checker</h1>
+        <h1>About our Safe Chat Checker</h1>
         
         <div className="about-section">
           <h2>Its Purpose</h2>
