@@ -8,7 +8,6 @@ import { connectToAllDBs } from './config/db.js';
 import userRoutes from './routes/userRoutes.js'; // מייבא את ה-routes
 import messageRoutes from './routes/messageRoutes.js';
 
-import rubberDuckRoutes from './routes/rubberDucks.js'; // Import the routes
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
