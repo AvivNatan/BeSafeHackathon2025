@@ -7,6 +7,11 @@
   font-family: 'Public Sans', sans-serif;
   color: #2c3e50;
   padding: 3rem 1.5rem;
+  /* Add these properties */
+  scroll-behavior: auto;
+  overflow-anchor: none;
+  position: relative;
+  top: 0;
 }
 
 .about-content {

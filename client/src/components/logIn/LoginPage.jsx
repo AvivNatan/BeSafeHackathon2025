@@ -28,6 +28,8 @@ const LoginPage = () => {
       setSuccess(result.message);
       setError(null);
       login(result.message.user, result.message.email);
+      window.scrollTo(0, 0);
+      document.body.style.overflow = 'auto';
       navigate('/chat');
     } else {
       setError(result ? result.message : 'Unexpected error');

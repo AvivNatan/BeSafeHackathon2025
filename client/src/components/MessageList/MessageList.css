@@ -1,13 +1,42 @@
+/* MessageList.css */
 .messages-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* add space between massages*/
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #f9f9f9; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    padding: 20px;
-      /* הוספת סקרולר */
-    max-height: 450px; /* גבול גובה, אפשר לשנות לפי הצורך */
-    overflow-y: auto; /* יאפשר גלילה אנכית כשיש יותר מדי תוכן */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 450px;
+  overflow-y: auto;
+  /* Prevent container from growing beyond max-height */
+  height: 450px;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  /* Optional: style scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+/* Style scrollbar for WebKit browsers */
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 4px;
+}
+
+/* ChatPage.css updates */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
 }

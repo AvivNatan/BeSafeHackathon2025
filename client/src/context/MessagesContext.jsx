@@ -14,6 +14,7 @@ const MessagesProvider = ({ children }) => {
 
     // when userID change i need to fetch the history messages and show them 
     useEffect(() => {
+        window.scrollTo(0, 0);
         getMessagesHistory();
     }, [userId]);
 

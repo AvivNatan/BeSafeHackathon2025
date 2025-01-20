@@ -9,8 +9,9 @@
     color: #2c3e50; /* Neutral dark color */
     padding: 1.5rem; /* Top padding for breathing space */
     gap: 1rem; /* Space between chat messages and input box */
+    position: relative; /* Prevent layout shifts */
   }
-  
+
   .chat-content {
     max-width: 800px;
     width: 100%;
