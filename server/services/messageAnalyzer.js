@@ -14,7 +14,7 @@ const classifyMessageWithHuggingFace = async (message) => {
 
     const apiEndpoint = 'https://api-inference.huggingface.co/models/facebook/bart-large-mnli'; // Zero-shot classification model
     const headers = {
-        'Authorization': `Bearer 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`,  // Replace with your API key
+        'Authorization': `Bearer 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`,  
     };
 
     const labels = ['phishing', 'sexual_harassment', 'fraud', 'fishing', 'safe', 'bullying'];  // Define custom categories
