@@ -1,8 +1,38 @@
 import natural from 'natural';
 import Sentiment from 'sentiment';
+import axios from 'axios';
+import fs from 'fs';
+import csv from 'csv-parser';
 const tokenizer = new natural.WordTokenizer();
 
 const sentiment = new Sentiment();
+
+
+// Function to classify message using Hugging Face zero-shot classification model
+const classifyMessageWithHuggingFace = async (message) => {
+    if (!message) throw new Error('Message is required for classification.');
+
+    const apiEndpoint = 'https://api-inference.huggingface.co/models/facebook/bart-large-mnli'; // Zero-shot classification model
+    const headers = {
+        'Authorization': `Bearer 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`,  // Replace with your API key
+    };
+
+    const labels = ['phishing', 'sexual_harassment', 'fraud', 'fishing', 'safe', 'bullying'];  // Define custom categories
+
+    try {
+        const response = await axios.post(apiEndpoint, {
+            inputs: message,
+            parameters: {
+                candidate_labels: labels, // These are the categories you want to classify into
+            },
+        }, { headers });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error while calling Hugging Face API:', error);
+        return null;
+    }
+};
 
 // Example function to adjust sentiment score based on custom lexicon
 const adjustSentiment = (message, sentimentScore) => {
@@ -36,25 +66,12 @@ const analyzeSentiment = (message) => {
     return result.score;
 };
 
+
+
 const customNaiveBayes = new natural.BayesClassifier();
 
-// Train the Naive Bayes classifier with example data
-const trainClassifier = () => {
-    // Unsafe content (phishing, fraud, etc.)
-    customNaiveBayes.addDocument('Your bank account has been compromised.', 'phishing');
-    customNaiveBayes.addDocument('Click here to claim your prize!', 'phishing');
-    customNaiveBayes.addDocument('This is a fraud attempt, click the link.', 'fraud');
-    customNaiveBayes.addDocument('You won a lottery, provide your bank details to claim.', 'phishing');
-    customNaiveBayes.addDocument('I will hurt you.', 'sexual_assault');
-    
-    // Safe content
-    customNaiveBayes.addDocument('This is a friendly reminder about our meeting tomorrow.', 'safe');
-    customNaiveBayes.addDocument('Thank you for your help!', 'safe');
-    customNaiveBayes.addDocument('Looking forward to our next conversation!', 'safe');
-    
-    // Train the classifier with documents
-    customNaiveBayes.train();
-};
+
+
 
 // Tokenize and classify message
 const classifyMessage = (message) => {
@@ -86,6 +103,8 @@ const generateFeedback = (sentimentScore, classification, features) => {
             return 'The message contains harmful or inappropriate language. Report it if necessary.';
         case 'safe':
             return 'The message appears to be safe.';
+        case 'bullying':
+            return 'The message contains harmful or bullying language. Consider addressing the issue respectfully or reporting it if necessary.'
         default:
             if (sentimentScore < 0) {
                 return 'The message has a negative tone. Avoid sending messages with harmful or aggressive language.';
@@ -101,15 +120,36 @@ const generateFeedback = (sentimentScore, classification, features) => {
 };
 
 // Main function
-const analyzeMessage = (message) => {
+const analyzeMessage = async(message) => {
     const sentimentScore = analyzeSentiment(message);
-    const classification = classifyMessage(message);
     const features = computeFeatures(message);
+    
+    // Only classify if sentiment is negative
+    let classification = 'safe';
+    if (sentimentScore < 0) {
+        classification = classifyMessage(message);
+    }
 
+     // Get classification from Hugging Face model
+     const hfClassification = await classifyMessageWithHuggingFace(message);
+
+     // Analyze the result from Hugging Face model
+   
+     if (hfClassification && hfClassification.labels && hfClassification.scores) {
+        // Get the label with the highest score
+        const bestIndex = hfClassification.scores.indexOf(Math.max(...hfClassification.scores));
+        const bestLabel = hfClassification.labels[bestIndex];
+        classification = bestLabel;
+        console.log("Best Label:", bestLabel);
+    
+    }
+    else{
+        console.log("No classification found from Hugging Face model");
+    }
     const feedback = generateFeedback(sentimentScore, classification, features);
 
     return {
-        isUnsafe: classification === 'phishing' || classification === 'fraud' || classification === 'sexual_assault' || sentimentScore < 0 || features.hasRepeatedPunctuation || features.hasAllCaps,
+        isUnsafe: classification === 'phishing' || classification === 'fraud' || classification === 'sexual_assault' || sentimentScore < 0 || features.hasRepeatedPunctuation || features.hasAllCaps || classification == 'bullying',
         analysis: {
             sentimentScore,
             classification,
@@ -122,5 +162,29 @@ const analyzeMessage = (message) => {
 // Train the classifier before usage
 //trainClassifier();
 
+// Read CSV and train Naive Bayes Classifier with data
+const trainClassifierFromCSV = (filePath) => {
+    fs.createReadStream(filePath)
+        .pipe(csv())
+        .on('data', (row) => {
+            // Assuming the CSV has columns "message" and "label" for text and classification
+            const message = row.message;
+            const label = row.label;
+
+            if (message && label) {
+                customNaiveBayes.addDocument(message, label);
+            }
+        })
+        .on('end', () => {
+            console.log('CSV file successfully processed');
+            customNaiveBayes.train();
+            console.log('Classifier trained with CSV data');
+        });
+};
+
+
+// Train classifier with CSV file data
+trainClassifierFromCSV('./services/messages_1000.csv');
+
 export default analyzeMessage;
-trainClassifier(); /*added*/
+//trainClassifier(); /*added*/
