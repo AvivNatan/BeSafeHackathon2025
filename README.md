@@ -9,8 +9,6 @@
   
 This project was created as part of the BeSafe Hackathon 2025, organized by QueenB in collaboration with AppsFlyer. The original template was adapted and extended to develop our own application focused on promoting online safety. Our project demonstrates full-stack development with a Node.js server, an Express backend, a React frontend powered by Vite, and MongoDB for database management.
 
-> **Note:** This project is still in progress and will be presented at the hackathon event next week.
-
 ---
 
 ## **Introduction**
